@@ -1,0 +1,37 @@
+{
+  "name": "gitbook-plugin-create-issue",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "gitbook": ">2.6.7"
+  },
+  "gitbook": {
+    "properties": {
+      "label": {
+        "default": "Create Issue",
+        "title": "Label for the create button",
+        "type": [
+          "string",
+          "object"
+        ]
+      }
+    }
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpfeil/gitbook-plugin-create-issue.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mpfeil/gitbook-plugin-create-issue/issues"
+  },
+  "homepage": "https://github.com/mpfeil/gitbook-plugin-create-issue#readme",
+  "dependencies": {
+    "tingle.js": "^0.7.2"
+  }
+}
