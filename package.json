@@ -14,6 +14,22 @@
           "string",
           "object"
         ]
+      },
+      "labelSubmitButton": {
+        "default": "Submit",
+        "title": "Label for the submit button",
+        "type": [
+          "string",
+          "object"
+        ]
+      },
+      "labelCancelButton": {
+        "default": "Cancel",
+        "title": "Label for the cancel button",
+        "type": [
+          "string",
+          "object"
+        ]
       }
     }
   },
