@@ -31,13 +31,13 @@ require(['gitbook'], function (gitbook) {
     });
 
     // add a button
-    modal.addFooterBtn(labelSubmit, 'tingle-btn tingle-btn--primary', function() {
+    modal.addFooterBtn(labelSubmit, 'tingle-btn tingle-btn--primary tingle-btn--pull-right', function() {
         // here goes some logic
         modal.close();
     });
 
     // add another button
-    modal.addFooterBtn(labelCancel, 'tingle-btn tingle-btn--danger', function() {
+    modal.addFooterBtn(labelCancel, 'tingle-btn tingle-btn--danger tingle-btn--pull-right', function() {
         // here goes some logic
         modal.close();
     });
@@ -49,7 +49,7 @@ require(['gitbook'], function (gitbook) {
       position: 'left',
       onClick: function() {
         // set content
-        modal.setContent('<div>First name: <input type="text" name="FirstName" value="Mickey"><br></div>');
+        modal.setContent('<div class="new-issue"><input class="new-issue-title input input-contrast" type="text" name="Title" placeholder="Title" value=""><br><textarea class="new-issue-text input input-contrast" rows="4" cols="50" placeholder="Leave a comment."></textarea></div>');
 
         // open modal
         modal.open();
