@@ -1,12 +1,17 @@
-require(['gitbook'], function (gitbook) {
+require(['gitbook', 'jQuery'], function (gitbook, $) {
   gitbook.events.bind('start', function (e, config) {
 
     var conf = config["create-issue"];
+
+    var github = conf.github;
+    if (github === undefined) { return; }
+
     var label = conf.label;
     var labelSubmit = conf.labelSubmitButton;
     var labelCancel = conf.labelCancelButton;
     var placeholderTitle = conf.placeholder.title;
     var placeholderText = conf.placeholder.text;
+
     var lang = gitbook.state.innerLanguage;
     if (lang) {
       // label can be a unique string for multi-languages site
@@ -48,8 +53,24 @@ require(['gitbook'], function (gitbook) {
 
     // add a button
     modal.addFooterBtn(labelSubmit, 'tingle-btn tingle-btn--primary tingle-btn--pull-right', function() {
-        modal.close();
-
+      $.ajax({
+        type: 'POST',
+        url: 'https://api.github.com/repos/'+github.repo+'/issues',
+        data: '{"title":"'+document.querySelector("#issue-title").value+'","body":"'+document.querySelector("#issue-title").value+'"}',
+        dataType: 'json',
+        headers: {
+          'Authorization':'token '+github.token,
+          'Content-Type':'application/json'
+        },
+        success: function(data) {
+          console.log("success");
+          modal.close();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+      
     });
 
     // add another button

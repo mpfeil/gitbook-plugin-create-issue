@@ -55,6 +55,18 @@
         "type": [
           "object"
         ]
+      },
+      "github": {
+        "repo": {
+          "default": "",
+          "title": "GitHub repo for creating issues",
+          "type": ["string"]
+        },
+        "token": {
+          "default": "",
+          "token": "OAuth token for creating issues",
+          "type": ["string"]
+        }
       }
     }
   },
@@ -71,8 +83,5 @@
   "bugs": {
     "url": "https://github.com/mpfeil/gitbook-plugin-create-issue/issues"
   },
-  "homepage": "https://github.com/mpfeil/gitbook-plugin-create-issue#readme",
-  "dependencies": {
-    "tingle.js": "^0.7.2"
-  }
+  "homepage": "https://github.com/mpfeil/gitbook-plugin-create-issue#readme"
 }
