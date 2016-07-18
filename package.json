@@ -30,6 +30,31 @@
           "string",
           "object"
         ]
+      },
+      "placeholder": {
+        "default": {
+          "title": "Title",
+          "text": "Leave a comment."
+        },
+        "title": {
+          "default": "Title",
+          "title": "Placeholder for title input field",
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "text": {
+          "default": "Leave a comment.",
+          "title": "Placeholder for textarea field",
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "type": [
+          "object"
+        ]
       }
     }
   },

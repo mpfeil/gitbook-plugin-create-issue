@@ -45,3 +45,12 @@
 .input-contrast:focus {
     background-color: #fff;
 }
+
+button[disabled] {
+    color: rgba(102,102,102,0.5);
+    cursor: default;
+    background-color: rgba(229,229,229,0.5);
+    background-image: none;
+    border-color: rgba(197,197,197,0.5);
+    box-shadow: none;
+}
