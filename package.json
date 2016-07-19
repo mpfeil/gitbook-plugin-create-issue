@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-create-issue",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Gitbook plugin for reporting issues on github",
   "keywords": [
     "github",
