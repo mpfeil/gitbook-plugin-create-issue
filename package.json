@@ -1,7 +1,12 @@
 {
   "name": "gitbook-plugin-create-issue",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Gitbook plugin for reporting issues on github",
+  "keywords": [
+    "github",
+    "issue",
+    "gitbook"
+  ],
   "engines": {
     "gitbook": ">2.6.7"
   },
@@ -67,6 +72,22 @@
           "token": "OAuth token for creating issues",
           "type": ["string"]
         }
+      },
+      "alerts": {
+        "default": {
+          "info": "Your issue was created successfully.",
+          "danger": "Your issue was not created successfully."
+        },
+        "info": {
+          "default": "Your issue was created successfully.",
+          "title": "Text if issue was created successfully",
+          "type": ["string", "object"]
+        },
+        "danger": {
+          "default": "Your issue was not created successfully.",
+          "title": "Text if issue was not created successfully",
+          "type": ["string", "object"]
+        }
       }
     }
   },
@@ -78,7 +99,7 @@
     "type": "git",
     "url": "git+https://github.com/mpfeil/gitbook-plugin-create-issue.git"
   },
-  "author": "",
+  "author": "Matthias Pfeil <matthias.pfeil@wwu.de>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mpfeil/gitbook-plugin-create-issue/issues"

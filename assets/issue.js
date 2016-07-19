@@ -11,6 +11,8 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
     var labelCancel = conf.labelCancelButton;
     var placeholderTitle = conf.placeholder.title;
     var placeholderText = conf.placeholder.text;
+    var alertInfoText = conf.alert.info;
+    var alertDangerText = conf.alert.danger;
 
     var lang = gitbook.state.innerLanguage;
     if (lang) {
@@ -20,6 +22,8 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
       if (typeof labelCancel === 'object') labelCancel = labelCancel[lang];
       if (typeof placeholderTitle === 'object') placeholderTitle = placeholderTitle[lang];
       if (typeof placeholderText === 'object') placeholderText = placeholderText[lang];
+      if (typeof alertInfoText === 'object') alertInfoText = alertInfoText[lang];
+      if (typeof alertDangerText === 'object') alertDangerText = alertDangerText[lang];
 
       lang = lang + '/';
     }
@@ -39,15 +43,18 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
       footer: true,
       stickyFooter: false,
       onOpen: function() {
-          console.log('modal open');
           document.querySelector(".tingle-btn--primary").disabled = true;
           document.querySelector("#issue-title").addEventListener("keyup", enableSubmitButton);
           document.querySelector("#issue-text").addEventListener("keyup", enableSubmitButton);
       },
       onClose: function() {
-          console.log('modal closed');
+          document.querySelector("#issue-title").value = "";
+          document.querySelector("#issue-text").value = "";
           document.querySelector("#issue-title").removeEventListener("keyup", enableSubmitButton);
           document.querySelector("#issue-text").removeEventListener("keyup", enableSubmitButton);
+          document.querySelector("#alert-container").classList.add("hidden");
+          document.querySelector("#alert-container").classList.remove("alert-info");
+          document.querySelector("#alert-container").classList.remove("alert-danger");
       }
     });
 
@@ -59,27 +66,27 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
         data: '{"title":"'+document.querySelector("#issue-title").value+'","body":"'+document.querySelector("#issue-title").value+'"}',
         dataType: 'json',
         headers: {
-          'Authorization':'token '+github.token,
+          'Authorization':'token '+ github.token,
           'Content-Type':'application/json'
         },
         success: function(data) {
-          console.log("success");
-          modal.close();
+          document.querySelector("#alert-container").classList.remove("alert-danger");
+          document.querySelector("#alert-container").classList.remove("hidden");
+          document.querySelector("#alert-container").classList.add("alert-info");
+          document.querySelector("#alert-container").innerHTML = alertInfoText + '<a href="'+data.html_url+'"_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>';
         },
         error: function(data) {
-          console.log(data);
+          document.querySelector("#alert-container").classList.remove("alert-info");
+          document.querySelector("#alert-container").classList.remove("hidden");
+          document.querySelector("#alert-container").classList.add("alert-danger");
+          document.querySelector("#alert-container").innerHTML = alertDangerText;
         }
       });
       
     });
 
-    // add another button
     modal.addFooterBtn(labelCancel, 'tingle-btn tingle-btn--danger tingle-btn--pull-right', function() {
         modal.close();
-
-        // clear input fields
-        document.querySelector("#issue-title").value = "";
-        document.querySelector("#issue-text").value = "";
     });
 
     gitbook.toolbar.createButton({
@@ -89,7 +96,7 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
       position: 'left',
       onClick: function() {
         // set content
-        modal.setContent('<div class="new-issue"><input class="new-issue-title input input-contrast" id="issue-title" type="text" name="Title" placeholder="'+placeholderTitle+'" value=""><br><textarea class="new-issue-text input input-contrast" id="issue-text" rows="4" cols="50" placeholder="'+placeholderText+'"></textarea></div>');
+        modal.setContent('<div class="new-issue"><div class="alert hidden" id="alert-container"></div><input class="new-issue-title input input-contrast" id="issue-title" type="text" name="Title" placeholder="'+placeholderTitle+'" value=""><br><textarea class="new-issue-text input input-contrast" id="issue-text" rows="4" cols="50" placeholder="'+placeholderText+'"></textarea></div>');
 
         // open modal
         modal.open();
